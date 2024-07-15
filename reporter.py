@@ -119,3 +119,8 @@ if __name__ == "__main__":
                     ro.send_report()
                 except Exception as e:
                     print(f"Error in generating ElasticIp report: {e}")
+
+
+MJ_APIKEY_PUBLIC=e4ef8b25dd289a37d1b26460e89c1c52
+MJ_APIKEY_PRIVATE=5f4d11d663fc8fe5131df3abbe56e47b
+MJ_SENDER_EMAIL=mangesh.shinde@hexaviewtech.com
