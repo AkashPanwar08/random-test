@@ -28,54 +28,94 @@ if __name__ == "__main__":
     DATE = datetime.now().strftime("%Y-%m-%d")
     ENV = "prod"
     for account in ACCOUNTS:
-        for serviceName in account.enabled_reports:
-            for region in account.aws_enabled_regions:
-                if region in REGIONS:
-                    try:
-                        ro = AuroraReport(accounts=ACCOUNTS, date=DATE)
-                        ro.send_report()
+        for region in account.aws_enabled_regions:
+            if region in REGIONS:
+                try:
+                    ro = AuroraReport(accounts=ACCOUNTS, date=DATE)
+                    ro.send_report()
+                except Exception as e:
+                    print(f"Error in generating Aurora report: {e}")
 
-                        ro = AutoTagToInstanceReports(accounts=ACCOUNTS, date=DATE)
-                        ro.send_report()
+                try:
+                    ro = AutoTagToInstanceReports(accounts=ACCOUNTS, date=DATE)
+                    ro.send_report()
+                except Exception as e:
+                    print(f"Error in generating AutoTagToInstance report: {e}")
 
-                        ro = COReports(accounts=ACCOUNTS, date=DATE)
-                        ro.send_report()
+                try:
+                    ro = COReports(accounts=ACCOUNTS, date=DATE)
+                    ro.send_report()
+                except Exception as e:
+                    print(f"Error in generating CO report: {e}")
 
-                        ro = DynamoDbReport(accounts=ACCOUNTS, date=DATE)
-                        ro.send_report()
+                try:
+                    ro = DynamoDbReport(accounts=ACCOUNTS, date=DATE)
+                    ro.send_report()
+                except Exception as e:
+                    print(f"Error in generating DynamoDB report: {e}")
 
-                        ebs = EBSReport(account=ACCOUNTS[0], date=DATE)
-                        ebs.send_report()
+                try:
+                    ebs = EBSReport(account=ACCOUNTS[0], date=DATE)
+                    ebs.send_report()
+                except Exception as e:
+                    print(f"Error in generating EBS report: {e}")
 
-                        ro = InstanceReport(accounts=ACCOUNTS, date=DATE)
-                        ro.send_report()
+                try:
+                    ro = InstanceReport(accounts=ACCOUNTS, date=DATE)
+                    ro.send_report()
+                except Exception as e:
+                    print(f"Error in generating Instance report: {e}")
 
-                        ro = EKSReports(accounts=ACCOUNTS, date=DATE)
-                        ro.send_report()
+                try:
+                    ro = EKSReports(accounts=ACCOUNTS, date=DATE)
+                    ro.send_report()
+                except Exception as e:
+                    print(f"Error in generating EKS report: {e}")
 
-                        ro = ELBReports(accounts=ACCOUNTS, date=DATE)
-                        ro.send_report()
+                try:
+                    ro = ELBReports(accounts=ACCOUNTS, date=DATE)
+                    ro.send_report()
+                except Exception as e:
+                    print(f"Error in generating ELB report: {e}")
 
-                        ro = InstanceTagVolumeReports(accounts=ACCOUNTS, date=DATE)
-                        ro.send_report()
+                try:
+                    ro = InstanceTagVolumeReports(accounts=ACCOUNTS, date=DATE)
+                    ro.send_report()
+                except Exception as e:
+                    print(f"Error in generating InstanceTagVolume report: {e}")
 
-                        ebs = IO1IO2Report(accounts=ACCOUNTS, date=DATE)
-                        ebs.send_report()
+                try:
+                    ebs = IO1IO2Report(accounts=ACCOUNTS, date=DATE)
+                    ebs.send_report()
+                except Exception as e:
+                    print(f"Error in generating IO1IO2 report: {e}")
 
-                        ro = S3Reports(account=ACCOUNTS[0], date=DATE)
-                        ro.send_report()
+                try:
+                    ro = S3Reports(account=ACCOUNTS[0], date=DATE)
+                    ro.send_report()
+                except Exception as e:
+                    print(f"Error in generating S3 report: {e}")
 
-                        ro = SnapshotReport(accounts=ACCOUNTS, date=DATE)
-                        ro.send_report()
+                try:
+                    ro = SnapshotReport(accounts=ACCOUNTS, date=DATE)
+                    ro.send_report()
+                except Exception as e:
+                    print(f"Error in generating Snapshot report: {e}")
 
-                        ro = UCReports(accounts=ACCOUNTS, date=DATE)
-                        ro.send_report()
+                try:
+                    ro = UCReports(accounts=ACCOUNTS, date=DATE)
+                    ro.send_report()
+                except Exception as e:
+                    print(f"Error in generating UC report: {e}")
 
-                        ro = VPCEndpointReport(accounts=ACCOUNTS, date=DATE)
-                        ro.send_report()
+                try:
+                    ro = VPCEndpointReport(accounts=ACCOUNTS, date=DATE)
+                    ro.send_report()
+                except Exception as e:
+                    print(f"Error in generating VPCEndpoint report: {e}")
 
-                        ro = ElasticIpReport(accounts=ACCOUNTS, date=DATE)
-                        ro.send_report()
-
-                    except Exception as e:
-                        print(f"Error in {serviceName} report: {e}")
+                try:
+                    ro = ElasticIpReport(accounts=ACCOUNTS, date=DATE)
+                    ro.send_report()
+                except Exception as e:
+                    print(f"Error in generating ElasticIp report: {e}")
