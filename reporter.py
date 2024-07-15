@@ -1,4 +1,8 @@
-from settings.models import AWSProfile
+from dotenv import load_dotenv
+from settings.config import ACCOUNTS, REGIONS
+from datetime import datetime
+
+
 from reports.generators.ebs import EBSReport
 from reports.generators.aurora import AuroraReport
 from reports.generators.autoscaling_tag_to_instance import AutoTagToInstanceReports
@@ -14,45 +18,64 @@ from reports.generators.s3_bucket import S3Reports
 from reports.generators.uncompressed_cloudfront import UCReports
 from reports.generators.vpc_endpoints import VPCEndpointReport
 from reports.generators.vpn import VPNReport
+from reports.generators.snapshot import SnapshotReport
 
-
-class ReportHandler:
-    def __init__(self, service_name: str, account: AWSProfile, date: str, env=None):
-        self.service_name = service_name
-        self.account = account
-        self.date = date
-        self.env = env
-
-    def send_report(self):
-        reports = [
-            EBSReport,
-            AuroraReport,
-            AutoTagToInstanceReports,
-            COReports,
-            InstanceReport,
-            DynamoDbReport,
-            EKSReports,
-            ElasticIpReport,
-            ELBReports,
-            InstanceTagVolumeReports,
-            IO1IO2Report,
-            S3Reports,
-            UCReports,
-            VPCEndpointReport,
-            VPNReport,
-        ]
-        for report in reports:
-            try:
-                reporter = report()
-                reporter.send_report(
-                    self.service_name, self.account, self.date, self.env
-                )
-            except Exception as e:
-                print(f"Error: {e}")
+load_dotenv(".env", override=True)
 
 
 if __name__ == "__main__":
-    from settings.config import ACCOUNTS
+    print("Welcome to AWS Bill Buster")
+    DATE = datetime.now().strftime("%Y-%m-%d")
+    ENV = "prod"
+    for account in ACCOUNTS:
+        for serviceName in account.enabled_reports:
+            for region in account.aws_enabled_regions:
+                if region in REGIONS:
+                    try:
+                        ro = AuroraReport(accounts=ACCOUNTS, date=DATE)
+                        ro.send_report()
 
-    ro = ReportHandler(service_name="ebs", account=ACCOUNTS[0], date="2024-07-11")
-    ro.send_report()
+                        ro = AutoTagToInstanceReports(accounts=ACCOUNTS, date=DATE)
+                        ro.send_report()
+
+                        ro = COReports(accounts=ACCOUNTS, date=DATE)
+                        ro.send_report()
+
+                        ro = DynamoDbReport(accounts=ACCOUNTS, date=DATE)
+                        ro.send_report()
+
+                        ebs = EBSReport(account=ACCOUNTS[0], date=DATE)
+                        ebs.send_report()
+
+                        ro = InstanceReport(accounts=ACCOUNTS, date=DATE)
+                        ro.send_report()
+
+                        ro = EKSReports(accounts=ACCOUNTS, date=DATE)
+                        ro.send_report()
+
+                        ro = ELBReports(accounts=ACCOUNTS, date=DATE)
+                        ro.send_report()
+
+                        ro = InstanceTagVolumeReports(accounts=ACCOUNTS, date=DATE)
+                        ro.send_report()
+
+                        ebs = IO1IO2Report(accounts=ACCOUNTS, date=DATE)
+                        ebs.send_report()
+
+                        ro = S3Reports(account=ACCOUNTS[0], date=DATE)
+                        ro.send_report()
+
+                        ro = SnapshotReport(accounts=ACCOUNTS, date=DATE)
+                        ro.send_report()
+
+                        ro = UCReports(accounts=ACCOUNTS, date=DATE)
+                        ro.send_report()
+
+                        ro = VPCEndpointReport(accounts=ACCOUNTS, date=DATE)
+                        ro.send_report()
+
+                        ro = ElasticIpReport(accounts=ACCOUNTS, date=DATE)
+                        ro.send_report()
+
+                    except Exception as e:
+                        print(f"Error in {serviceName} report: {e}")
