@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWS Bill Buster Report</title>
+</head>
+<body style="margin: 0; padding: 0; font-family: Arial, sans-serif; line-height: 1.6; background-color: #f4f4f4; color: #333;">
+    <div style="width: 100%; margin: 0 auto; background-color: white;">
+        <div style="text-align: center; padding: 20px; background-color: rgb(240, 248, 255); color: black;">
+            <h1 style="margin-bottom: 12px; font-size: 28px;">
+                <span style="color: #ff9900;">AWS</span><span style="color: #003366;"> Bill Buster</span>
+            </h1>
+            <h4 style="margin-top: 10px; color: #003366; font-size: 18px;">By Hexaview</h4>
+        </div>
+        <div style="padding: 30px;">
+            <h2 style="color: #003366; font-size: 24px;">Hello Team,</h2>
+            <h2 style="color: #003366; font-size: 24px; margin-bottom: 20px;">Please find the AWS Cost Optimization Report.</h2>
+            <div style="margin-top: 30px;">
+                {% for report in reports %}
+                <div style="margin-bottom: 40px;">
+                    <h2 style="color: #003366; border-bottom: 2px solid #ff9900; padding-bottom: 10px; font-size: 22px;">{{report["title"]}}</h2>
+                    {% for table_name in report.get("report_data",{}).get("table_names",[])%} 
+                    {% if report["report_data"].get(table_name, {}).get("data") %}
+                    <div style="margin-top: 20px;">
+                        <h3 style="color: #003366; font-size: 18px;">{{report["report_data"][table_name]["message"]}}</h3>
+                    </div>
+                    <div style="overflow-x: auto; margin-top: 15px;">
+                        <table style="width: 100%; border-collapse: collapse;">
+                            <thead>
+                                <tr style="background-color: #003366; color: white;">
+                                    {% for column in report["report_data"][table_name]["columns"] %}
+                                    <th style="padding: 12px; text-align: left; border: 1px solid #ddd; font-size: 16px;">{{ column }}</th>
+                                    {% endfor %}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for data in report["report_data"][table_name]["data"] %}
+                                <tr style="background-color: {% if loop.index is even %}#f2f2f2{% else %}#ffffff{% endif %};">
+                                    {% for column in report["report_data"][table_name]["columns"] %}
+                                    <td style="padding: 12px; text-align: left; border: 1px solid #ddd; font-size: 14px;">{{ data[column] }}</td>
+                                    {% endfor %}
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {% else %}
+                    <p style="color: #666; font-size: 16px;">No data found for {{table_name}}</p>
+                    {% endif %}
+                    <br />
+                    {% endfor %}
+                </div>
+                {% endfor %}
+            </div>
+            <p style="margin-top: 40px; border-top: 1px solid #ddd; padding-top: 20px; font-size: 16px;">
+                Thank you,<br />
+                <strong>Team AWS Bill Buster</strong>
+            </p>
+        </div>
+    </div>
+</body>
+</html>
