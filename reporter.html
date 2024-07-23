@@ -13,9 +13,12 @@
             </h1>
             <h4 style="margin-top: 10px; color: #003366; font-size: 18px;">By Hexaview</h4>
         </div>
-        <div style="padding: 30px;">
-            <h2 style="color: #003366; font-size: 24px;">Hello Team,</h2>
-            <h2 style="color: #003366; font-size: 24px; margin-bottom: 20px;">Please find the AWS Cost Optimization Report.</h2>
+        <div style="padding: 40px 30px; background-color: white;">
+            <h2 style="color: #003366; font-size: 28px; margin: 0 0 20px; border-bottom: 2px solid #ff9900; padding-bottom: 10px;">Welcome to Your Cost Optimization Report</h2>
+            <p style="font-size: 18px; color: #555; line-height: 1.6; margin-bottom: 30px;">
+                Dear Team,<br><br>
+                We're excited to present your personalized AWS Cost Optimization Report. This comprehensive analysis is designed to help you maximize efficiency and minimize expenses across your AWS infrastructure. Let's dive into the insights we've uncovered for you.
+            </p>
             <div style="margin-top: 30px;">
                 {% for report in reports %}
                 <div style="margin-bottom: 40px;">
@@ -44,6 +47,11 @@
                                 {% endfor %}
                             </tbody>
                         </table>
+                    </div>
+                    <div style="margin-top: 15px; padding: 10px; background-color: #f8f8f8; border-left: 4px solid #003366; border-radius: 4px;">
+                        {% for termsnconditions in report["report_data"][table_name].get("summary", []) %}
+                                <p style="color: #555; font-size: 14px; font-style: italic; margin: 5px 0;">*{{ termsnconditions }}</p>
+                        {% endfor %}
                     </div>
                     {% else %}
                     <p style="color: #666; font-size: 16px;">No data found for {{table_name}}</p>
