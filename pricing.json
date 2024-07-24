@@ -1,0 +1,166 @@
+{
+  "AWSEBS": {
+    "us-east-1": {
+      "gp3_perGB": 0.08,
+      "gp3_iops": 0.005,
+      "gp3_throughtput": 0.04,
+      "gp2_perGB": 0.1,
+      "io2_perGB": 0.125,
+      "io2_iops": {
+        "0_to_32k": 0.065,
+        "32k_to_64k": 0.046,
+        "64k_greater": 0.032
+      },
+      "io1_perGB": 0.125,
+      "io1_iops": 0.065
+    },
+    "us-east-2": {
+      "gp3_perGB": 0.08,
+      "gp3_iops": 0.005,
+      "gp3_throughtput": 0.04,
+      "gp2_perGB": 0.1,
+      "io2_perGB": 0.125,
+      "io2_iops": {
+        "0_to_32k": 0.065,
+        "32k_to_64k": 0.046,
+        "64k_greater": 0.032
+      },
+      "io1_perGB": 0.125,
+      "io1_iops": 0.065
+    },
+    "us-west-2": {
+      "gp3_perGB": 0.08,
+      "gp3_iops": 0.005,
+      "gp3_throughtput": 0.04,
+      "gp2_perGB": 0.1,
+      "io2_perGB": 0.125,
+      "io2_iops": {
+        "0_to_32k": 0.065,
+        "32k_to_64k": 0.046,
+        "64k_greater": 0.032
+      },
+      "io1_perGB": 0.125,
+      "io1_iops": 0.065
+    }
+  },
+  "AWSVPN": {
+    "us-east-1": {
+      "perMonth": 36.0
+    },
+    "us-west-2": {
+      "perMonth": 36.0
+    }
+  },
+  "AWSElasticIP": {
+    "us-east-1": {
+      "perMonth": 3.6
+    },
+    "us-west-2": {
+      "perMonth": 3.6
+    }
+  },
+  "AWSKubernetes": {
+    "us-east-1": {
+      "standard": 73,
+      "extendedSupport": 438
+    },
+    "us-west-2": {
+      "standard": 73,
+      "extendedSupport": 438
+    }
+  },
+  "ELB": {
+    "us-east-1": {
+      "application": 20.53,
+      "network": 20.53,
+      "gateway": 20.53,
+      "classic": 20.53
+    },
+    "us-west-2": {
+      "application": 20.53,
+      "network": 20.53,
+      "gateway": 20.53,
+      "classic": 20.53
+    }
+  },
+  "AWSDynamoDB": {
+    "us-east-1": {
+      "PROVISIONED": {
+        "STANDARD": {
+          "perWriteCapacityUnitPerHr": 0.00065,
+          "perReadCapacityUnitPerHr": 0.00013,
+          "perGBperMnth": 0.25
+        },
+        "STANDARD-IA": {
+          "perWriteCapacityUnitPerHr": 0.00081,
+          "perReadCapacityUnitPerHr": 0.00016,
+          "perGBperMnth": 0.1
+        }
+      },
+      "ON-DEMAND": {
+        "STANDARD": {
+          "perWriteRequestUnit": 1.25,
+          "perReadRequestUnit": 0.25,
+          "perGBperMnth": 0.25
+        },
+        "STANDARD-IA": {
+          "perWriteRequestUnit": 1.56,
+          "perReadRequestUnit": 0.31,
+          "perGBperMnth": 0.1
+        }
+      }
+    },
+    "us-east-2": {
+      "PROVISIONED": {
+        "STANDARD": {
+          "perWriteCapacityUnitPerHr": 0.00065,
+          "perReadCapacityUnitPerHr": 0.00013,
+          "perGBperMnth": 0.25
+        },
+        "STANDARD-IA": {
+          "perWriteCapacityUnitPerHr": 0.00081,
+          "perReadCapacityUnitPerHr": 0.00016,
+          "perGBperMnth": 0.1
+        }
+      },
+      "ON-DEMAND": {
+        "STANDARD": {
+          "perWriteRequestUnit": 1.25,
+          "perReadRequestUnit": 0.25,
+          "perGBperMnth": 0.25
+        },
+        "STANDARD-IA": {
+          "perWriteRequestUnit": 1.56,
+          "perReadRequestUnit": 0.31,
+          "perGBperMnth": 0.1
+        }
+      }
+    },
+    "us-west-2": {
+      "PROVISIONED": {
+        "STANDARD": {
+          "perWriteCapacityUnitPerHr": 0.00065,
+          "perReadCapacityUnitPerHr": 0.00013,
+          "perGBperMnth": 0.25
+        },
+        "STANDARD-IA": {
+          "perWriteCapacityUnitPerHr": 0.00081,
+          "perReadCapacityUnitPerHr": 0.00016,
+          "perGBperMnth": 0.1
+        }
+      },
+      "ON-DEMAND": {
+        "STANDARD": {
+          "perWriteRequestUnit": 1.25,
+          "perReadRequestUnit": 0.25,
+          "perGBperMnth": 0.25
+        },
+        "STANDARD-IA": {
+          "perWriteRequestUnit": 1.56,
+          "perReadRequestUnit": 0.31,
+          "perGBperMnth": 0.1
+        }
+      }
+    }
+  }
+}
